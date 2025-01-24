@@ -1,0 +1,53 @@
+version: "3.1"
+services:
+  suple-ti:
+    build:
+      context: ./system
+      dockerfile: Dockerfile
+    image: suple-ti-image
+    container_name: suple-ti
+    entrypoint:
+      - /code/docker-entrypoint.sh
+    environment:
+      - DB_CONNECTION=mysql
+      - DB_HOST=mysql-db
+      - DB_PORT=3306
+      - DB_DATABASE=suple_ti_database
+      - DB_USERNAME=suple_ti_user
+      - DB_PASSWORD=suple_ti_password
+    ports:
+      - 8000:8000
+      - 5173:5173
+    networks:
+      - db-connection
+    depends_on:
+      mysql-db:
+        condition: service_healthy
+        restart: true
+  mysql-db:
+    image: mysql
+    container_name: mysql-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: "suple_ti_password"
+      MYSQL_DATABASE: "suple_ti_database"
+      MYSQL_USER: "suple_ti_user"
+      MYSQL_PASSWORD: "suple_ti_password"
+    ports:
+      - 3306:3306
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "--silent"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - db-connection
+    volumes:
+      - database-mysql:/var/lib/mysql
+
+volumes:
+  database-mysql:
+
+networks:
+  db-connection:
+    driver: bridge
