@@ -13,6 +13,14 @@
 <code>
 sudo docker run hello-world
 </code>
+<li>Crie um volume com o nome <b>database-mysql</b>:</li>
+<code>
+docker volume create database-mysql
+</code>
+&nbsp;ou
+<code>
+sudo docker volume create database-mysql
+</code>
 <li>Caso não esteja ative o docker engine</li>
 <li>Para rodar o código use os segintes comandos:</li>
 <code>
