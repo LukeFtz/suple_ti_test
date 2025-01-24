@@ -10,19 +10,16 @@
 <li>Clone o repositório na sua máquina</li>
 <li>Abra o terminal e navegue a até a pasta do repositório</li>
 <li>Confirme que o docker está rodando:</li>
-</ul>
 <code>
 sudo docker run hello-world
 </code>
-
-<ul>
 <li>Caso não esteja ative o docker engine</li>
 <li>Para rodar o código use os segintes comandos:</li>
-</ul>
 <code>
 docker compose up --build
 </code>
-<p>ou</p>
+&nbsp;ou
 <code>
 sudo docker compose up --build
 </code>
+</ul>
